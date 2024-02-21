@@ -61,3 +61,14 @@ class Competicao(models.Model):
     categoria = models.CharField(max_length=10, choices=CATEGORIA_CHOICES, blank=False, null=False)
 
 
+
+class Titulo(models.Model):
+    nome = models.CharField(max_length=50, blank=False, null=False)
+    ano_conquista = models.IntegerField(blank=False, null=False)
+    colocacao = models.CharField(max_length=10, blank=False, null=False)
+
+    time = models.ForeignKey(Time, on_delete=models.CASCADE, related_name='Times')
+
+    
+    def __str__(self):
+        return self.nome
