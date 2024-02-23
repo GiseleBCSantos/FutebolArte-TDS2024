@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogadores</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Exibição de jogadores</h2>
+
+        <ul>
+            {% for jogador in jogadores %}
+
+            <li>{{jogador.nome}}</li>
+
+            {% endfor %}
+        </ul>
+
+    </div>
+
+</body>
+
+</html>
