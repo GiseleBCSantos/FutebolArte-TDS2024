@@ -35,13 +35,25 @@ class Jogador(models.Model):
         ('F', 'Feminino'),
         ('M', 'Masculino')
     )
+
+    POSICAO_CHOICES = (
+        ('Goleiro', 'Goleiro'),
+        ('Zagueiro', 'Zagueiro'),
+        ('Lateral', 'Lateral'),
+        ('Atacante', 'Atacante')
+    )
     
     nome = models.CharField(max_length=100, blank=False, null=False)
-    foto = models.ImageField()
+
+    foto = models.ImageField(upload_to='Times/Jogadores')
+
     time = models.ForeignKey(Time, related_name='Time', on_delete=models.CASCADE)
-    posicao = models.CharField(max_length=20, blank=False, null=False)
+    posicao = models.CharField(max_length=20, blank=False, null=False, choices=POSICAO_CHOICES)
     numero_camisa = models.IntegerField(blank=False, null=False)
-    sexo = models.CharField(max_length=10, choices=SEXO_CHOICES, blank=False, null=False)    
+    sexo = models.CharField(max_length=10, choices=SEXO_CHOICES, blank=False, null=False)   
+
+    def __str__(self):
+        return self.nome 
 
 
 class Competicao(models.Model):
@@ -60,6 +72,8 @@ class Competicao(models.Model):
     tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, blank=False, null=False)
     categoria = models.CharField(max_length=10, choices=CATEGORIA_CHOICES, blank=False, null=False)
 
+    def __str__(self):
+        return self.nome 
 
 
 class Titulo(models.Model):
