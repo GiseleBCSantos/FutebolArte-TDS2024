@@ -19,7 +19,7 @@ class TimeAdmin(admin.ModelAdmin):
     search_fields = ('nome', 'divisao_atual', 'imagem', 'titulos', 'uf', 'modalidade')
     list_filter = ('divisao_atual', 'modalidade')
 
-    inlines = [TituloInlineAdmin, JogadorInlineAdmin]
+    inlines = [JogadorInlineAdmin, TituloInlineAdmin]
 
     
     def imagem(self, obj):
