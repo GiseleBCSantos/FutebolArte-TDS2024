@@ -5,11 +5,21 @@ from django.utils.html import format_html
 # Register your models here.
 
 
+class JogadorInlineAdmin(admin.TabularInline):
+    model = Jogador
+    extra = 0
+
+class TituloInlineAdmin(admin.TabularInline):
+    model = Titulo
+    extra = 0
+
 @admin.register(Time)
 class TimeAdmin(admin.ModelAdmin):
     list_display = ('nome', 'divisao_atual', 'imagem', 'titulos', 'uf', 'modalidade')
     search_fields = ('nome', 'divisao_atual', 'imagem', 'titulos', 'uf', 'modalidade')
     list_filter = ('divisao_atual', 'modalidade')
+
+    inlines = [TituloInlineAdmin, JogadorInlineAdmin]
 
     
     def imagem(self, obj):
