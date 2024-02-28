@@ -11,18 +11,23 @@ class Time(models.Model):
         ('M', 'Masculino')
     )
     
+    DIVISAO_CHOICES = (
+        ('A', 'Série A'), 
+        ('B', 'Série B'), 
+        ('C', 'Série C'), 
+        ('D', 'Série D'), 
+        ('S', 'Sem série')
+    )
+    
     
     nome = models.CharField(max_length=30, blank=False, null=False)
     ano_fundacao = models.IntegerField(blank=False, null=False)
-    divisao_atual = models.CharField(max_length=5, blank=False, null=False)
+    divisao_atual = models.CharField(choices=DIVISAO_CHOICES, max_length=5, blank=False, null=False)
     
     escudo = models.ImageField(upload_to='Times/escudos')
     
     
-    titulos = models.IntegerField(blank=False, null=False)
     cidade = models.ForeignKey(Cidade, related_name='times', on_delete=models.CASCADE)
-    uf = models.ForeignKey(Estado, related_name='times', on_delete=models.CASCADE)
-    pais = models.ForeignKey(Pais, on_delete=models.CASCADE, related_name='times')
     modalidade = models.CharField(max_length=10, choices=MODALIDADE_CHOICES)
     
     def __str__(self):
@@ -52,6 +57,9 @@ class Jogador(models.Model):
     numero_camisa = models.IntegerField(blank=False, null=False)
     sexo = models.CharField(max_length=10, choices=SEXO_CHOICES, blank=False, null=False)   
 
+    class Meta:
+        verbose_name_plural = 'Jogadores'
+
     def __str__(self):
         return self.nome 
 
@@ -77,9 +85,14 @@ class Competicao(models.Model):
 
 
 class Titulo(models.Model):
+    COLOCACAO_CHOICES = (
+        ('1°', '1° Lugar'),
+        ('2°', '2° Lugar'),
+        ('3°', '3° Lugar'),
+    )
     nome = models.CharField(max_length=50, blank=False, null=False)
     ano_conquista = models.IntegerField(blank=False, null=False)
-    colocacao = models.CharField(max_length=10, blank=False, null=False)
+    colocacao = models.CharField(choices=COLOCACAO_CHOICES, max_length=10, blank=False, null=False)
 
     time = models.ForeignKey(Time, on_delete=models.CASCADE, related_name='Times')
 
