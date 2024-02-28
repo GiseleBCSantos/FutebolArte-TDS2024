@@ -20,10 +20,10 @@ class CompeticaoInlineAdmin(admin.TabularInline):
 @admin.register(Time)
 class TimeAdmin(admin.ModelAdmin):
     list_display = ('nome', 'divisao_atual', 'imagem', 'cidade', 'modalidade')
-    search_fields = ('nome', 'divisao_atual', 'imagem', 'cidade', 'modalidade')
+    search_fields = ('nome',)
     list_filter = ('divisao_atual', 'modalidade')
 
-    inlines = [JogadorInlineAdmin, TituloInlineAdmin]
+    inlines = [JogadorInlineAdmin, TituloInlineAdmin, CompeticaoInlineAdmin]
 
     
     def imagem(self, obj):
@@ -33,8 +33,12 @@ class TimeAdmin(admin.ModelAdmin):
 class JogadorAdmin(admin.ModelAdmin):
     list_display = ['nome', 'imagem', 'time', 'posicao', 'numero_camisa', 'sexo']
     list_filter = ['time', 'posicao', 'sexo']
-    search_fields = ['nome', 'time', 'camisa']
+    search_fields = ['nome']
 
     def imagem(self, obj):
-        return format_html(f"<img src='{obj.foto.url}' width=50px height=50px")
+        url = 'https://placehold.co/50'
+        if (obj.foto):
+            url = obj.foto.url
+        
+        return format_html(f"<img src='{url}' width=50px height=50px")
 

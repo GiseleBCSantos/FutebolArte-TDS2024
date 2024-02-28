@@ -50,7 +50,7 @@ class Jogador(models.Model):
     
     nome = models.CharField(max_length=100, blank=False, null=False)
 
-    foto = models.ImageField(upload_to='Times/Jogadores')
+    foto = models.ImageField(upload_to='Times/Jogadores', blank=True)
 
     time = models.ForeignKey(Time, related_name='Time', on_delete=models.CASCADE)
     posicao = models.CharField(max_length=20, blank=False, null=False, choices=POSICAO_CHOICES)
@@ -72,13 +72,15 @@ class Competicao(models.Model):
     )
     
     CATEGORIA_CHOICES = (
-        ('COPA', 'copa'),
-        ('CAMPEONATO', 'campeonato')
+        ('COPA', 'COPA'),
+        ('CAMPEONATO', 'CAMPEONATO')
     )
     
     nome = models.CharField(max_length=30, blank=False, null=False)
     tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, blank=False, null=False)
     categoria = models.CharField(max_length=10, choices=CATEGORIA_CHOICES, blank=False, null=False)
+    
+    time = models.ForeignKey(Time, on_delete=models.CASCADE, related_name='Competicoes', null=True)
 
     def __str__(self):
         return self.nome 
@@ -94,7 +96,7 @@ class Titulo(models.Model):
     ano_conquista = models.IntegerField(blank=False, null=False)
     colocacao = models.CharField(choices=COLOCACAO_CHOICES, max_length=10, blank=False, null=False)
 
-    time = models.ForeignKey(Time, on_delete=models.CASCADE, related_name='Times')
+    time = models.ForeignKey(Time, on_delete=models.CASCADE, related_name='Titulos')
 
     
     def __str__(self):
