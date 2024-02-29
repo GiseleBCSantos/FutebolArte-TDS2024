@@ -1,0 +1,12 @@
+Acessar admin no link http://127.0.0.1:8000/restrito
+
+Super user
+>> login: aluno
+>> senha: 123
+
+Usuario responsavel por adicionar jogadores:
+>> login: responsavel_adicionar_jogadores
+>> senha: Jogadores1
+
+antes de abrir executar: pip install django_admin_interface
+
