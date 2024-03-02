@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-jhkyn)jiyd$r(wc*rkj%f34tbck4)+$ed%+umw8ldnh(iit5u7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['futebolarte-tds2024-0035.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1','futebolarte-tds2024-0035.onrender.com']
 
 CSRF_TRUSTED_ORIGINS = ['https://futebolarte-tds2024-0035.onrender.com']
 
@@ -83,24 +83,24 @@ WSGI_APPLICATION = "FutebolArte2.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-# Postgresql remoto
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": config('DB_NAME'),
-#         "USER": config('DB_USER'),
-#         "PASSWORD": config('DB_PASSWORD'),
-#         "HOST": config('DB_HOST'),
-#         "PORT": config('DB_PORT'),
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
+
+# Postgresql remoto
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config('DB_NAME'),
+        "USER": config('DB_USER'),
+        "PASSWORD": config('DB_PASSWORD'),
+        "HOST": config('DB_HOST'),
+        "PORT": config('DB_PORT'),
+    }
+}
 
 
 # Password validation
