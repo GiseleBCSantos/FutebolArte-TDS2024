@@ -8,6 +8,16 @@ from django.utils.html import format_html
 class JogadorInlineAdmin(admin.TabularInline):
     model = Jogador
     extra = 0
+    fields = ('foto_img', 'nome', 'numero_camisa', 'foto',)
+    readonly_fields = ('foto_img',)
+    
+    @admin.display(description='Foto')
+    def foto_img(self, obj):
+        url = 'https://placehold.co/50'
+        if (obj.foto):
+            url = obj.foto.url
+        
+        return format_html(f"<img src='{url}' width=50px height=50px")
 
 class TituloInlineAdmin(admin.TabularInline):
     model = Titulo
@@ -27,7 +37,10 @@ class TimeAdmin(admin.ModelAdmin):
 
     
     def imagem(self, obj):
-        return format_html(f"<img src='{obj.escudo.url}' width=50px height=50px>")
+        url = 'https://placehold.co/50'
+        if obj.escudo:
+            url = obj.escudo.url
+        return format_html(f"<img src='{url}' width=50px height=50px>")
     
 @admin.register(Jogador)
 class JogadorAdmin(admin.ModelAdmin):
